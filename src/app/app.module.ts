@@ -11,6 +11,14 @@ import { StarsComponent } from './stars/stars.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProducterComponent } from './producter/producter.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { HomeComponent } from './home/home.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const routeConfig: Routes = [
+  {path: '', component: HomeComponent },
+  {path: 'product/:prodTitle', component: ProductDetailComponent}
+]
 
 @NgModule({
   declarations: [
@@ -21,9 +29,12 @@ import { CarouselComponent } from './carousel/carousel.component';
     NavbarComponent,
     ProducterComponent,
     CarouselComponent,
+    ProductDetailComponent,
+    HomeComponent,
 
   ],
   imports: [
+    RouterModule.forRoot(routeConfig),
     BrowserModule,
     FormsModule,
     HttpModule
