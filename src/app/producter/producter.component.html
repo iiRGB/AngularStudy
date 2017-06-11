@@ -1,9 +1,18 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <input class="form-control" placeholder="请输入商品名称"
+       [formcontrol]="titleFilter">
+    </div>
+  </div>
+</div>
+
 <div *ngFor = "let product of products" class="col-md-4 col-sm-4 col-lg-4">
   <div class="thumbnail">
     <img src="http://placehold.it/320X150" >
     <div class="caption">
       <h4 class="pull-right">${{product.price}}</h4>
-      <h4><a [routerLink]="['/product', product.title]">{{product.title}}</a></h4>
+      <h4><a [routerLink]="['/product', product.id]">{{product.title}}</a></h4>
       <p>{{product.desc}}</p>
     </div>
     <div>

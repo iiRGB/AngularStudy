@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Product, ProductService} from '../share/product.service';
+import {FormControl} from '@angular/forms';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-producter',
@@ -6,31 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./producter.component.css']
 })
 export class ProducterComponent implements OnInit {
+  private products: Product[];
 
-  private products: Array<Product>;
+  private keyword: string;
 
-  constructor() { }
+  private titleFilter: FormControl = new FormControl();
+
+  constructor(private productService: ProductService) {
+    this.titleFilter.valueChanges
+      .debounceTime(500)
+      .subscribe(
+        value => this.keyword = value
+      );
+  }
 
   ngOnInit() {
-    this.products = [
-      new Product(1, 'first', 1.99, 1.5, 'This is the first Product', ['电子', '3C']),
-      new Product(1, 'second', 1.99, 2.5, 'This is the first Product', ['电子', '3C']),
-      new Product(1, 'third', 1.99, 3.5, 'This is the first Product', ['电子', '3C']),
-      new Product(1, 'third', 1.99, 4, 'This is the first Product', ['电子', '3C']),
-      new Product(1, 'third', 1.99, 3, 'This is the first Product', ['电子', '3C']),
-      new Product(1, 'third', 1.99, 5, 'This is the first Product', ['电子', '3C'])
-    ];
+    this.products = this.productService.getProducts();
   }
 
 }
 
-export class Product {
-  constructor(
-    public id: number ,
-    public title: string ,
-    public price: number,
-    public rating: number,
-    public desc: string,
-    public categories: Array<string>
-  ){}
-}
+

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 
@@ -14,10 +14,11 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
+import {ProductService} from './share/product.service';
 
 const routeConfig: Routes = [
   {path: '', component: HomeComponent },
-  {path: 'product/:prodTitle', component: ProductDetailComponent}
+  {path: 'product/:id', component: ProductDetailComponent}
 ]
 
 @NgModule({
@@ -37,9 +38,10 @@ const routeConfig: Routes = [
     RouterModule.forRoot(routeConfig),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ ProductService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
